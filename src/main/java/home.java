@@ -30,13 +30,19 @@ public class home extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(200, 200));
@@ -44,15 +50,99 @@ public class home extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
+        jPanel2.setBackground(new java.awt.Color(86, 82, 110));
+
+        jButton1.setBackground(new java.awt.Color(86, 82, 110));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Add User Male_1.png"))); // NOI18N
+        jButton1.setText("New Member");
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        jButton1.setIconTextGap(0);
+
+        jButton2.setBackground(new java.awt.Color(86, 82, 110));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Edit Profile.png"))); // NOI18N
+        jButton2.setText("Update & Delete");
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setFocusPainted(false);
+        jButton2.setFocusable(false);
+
+        jButton3.setBackground(new java.awt.Color(86, 82, 110));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/List_1.png"))); // NOI18N
+        jButton3.setText("Members");
+        jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setFocusPainted(false);
+        jButton3.setFocusable(false);
+
+        jButton4.setBackground(new java.awt.Color(86, 82, 110));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Mobile Payment_2.png"))); // NOI18N
+        jButton4.setText("Payment");
+        jButton4.setBorder(null);
+        jButton4.setBorderPainted(false);
+        jButton4.setFocusPainted(false);
+        jButton4.setFocusable(false);
+
+        jButton6.setBackground(new java.awt.Color(86, 82, 110));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Fire Exit_1.png"))); // NOI18N
+        jButton6.setText("Exit");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
+                .addComponent(jButton6)
+                .addGap(12, 12, 12))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1366, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1433, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 723, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jMenuBar1.setBorder(null);
@@ -66,7 +156,7 @@ public class home extends javax.swing.JFrame {
         jMenu1.setText("New Member");
         jMenu1.setBorderPainted(false);
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jMenu1.setIconTextGap(0);
+        jMenu1.setIconTextGap(10);
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu1MouseClicked(evt);
@@ -80,7 +170,7 @@ public class home extends javax.swing.JFrame {
         jMenu2.setText("Update & Delete");
         jMenu2.setBorderPainted(false);
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jMenu2.setIconTextGap(0);
+        jMenu2.setIconTextGap(10);
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu2MouseClicked(evt);
@@ -94,7 +184,7 @@ public class home extends javax.swing.JFrame {
         jMenu3.setText("Members");
         jMenu3.setBorderPainted(false);
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jMenu3.setIconTextGap(0);
+        jMenu3.setIconTextGap(10);
         jMenu3.addMenuKeyListener(new javax.swing.event.MenuKeyListener() {
             public void menuKeyPressed(javax.swing.event.MenuKeyEvent evt) {
                 jMenu3MenuKeyPressed(evt);
@@ -117,22 +207,8 @@ public class home extends javax.swing.JFrame {
         jMenu4.setText("Payment");
         jMenu4.setBorderPainted(false);
         jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jMenu4.setIconTextGap(0);
+        jMenu4.setIconTextGap(10);
         jMenuBar1.add(jMenu4);
-
-        jMenu5.setBorder(null);
-        jMenu5.setForeground(new java.awt.Color(204, 204, 204));
-        jMenu5.setIcon(new javax.swing.ImageIcon("D:\\Commisions\\GymManagementSystem\\src\\main\\java\\Images\\Enter_1.png")); // NOI18N
-        jMenu5.setText("Logout");
-        jMenu5.setBorderPainted(false);
-        jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jMenu5.setIconTextGap(0);
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu5MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu5);
 
         jMenu6.setBorder(null);
         jMenu6.setForeground(new java.awt.Color(204, 204, 204));
@@ -140,13 +216,29 @@ public class home extends javax.swing.JFrame {
         jMenu6.setText("Exit");
         jMenu6.setBorderPainted(false);
         jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jMenu6.setIconTextGap(0);
+        jMenu6.setIconTextGap(10);
         jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu6MouseClicked(evt);
             }
         });
         jMenuBar1.add(jMenu6);
+
+        jMenu5.setBorder(null);
+        jMenu5.setForeground(new java.awt.Color(204, 204, 204));
+        jMenu5.setIcon(new javax.swing.ImageIcon("D:\\Commisions\\GymManagementSystem\\src\\main\\java\\Images\\Enter_1.png")); // NOI18N
+        jMenu5.setText("Logout");
+        jMenu5.setBorderPainted(false);
+        jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jMenu5.setHideActionText(true);
+        jMenu5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jMenu5.setIconTextGap(10);
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -293,6 +385,11 @@ public class home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -301,5 +398,6 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

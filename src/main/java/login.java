@@ -43,9 +43,8 @@ public class login extends javax.swing.JFrame {
         setTitle("GMS");
         setBackground(new java.awt.Color(75, 75, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1000, 768));
-        setResizable(false);
-        setSize(new java.awt.Dimension(1000, 768));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
+        setSize(new java.awt.Dimension(1000, 600));
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -146,7 +145,7 @@ public class login extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Commisions\\GymManagementSystem\\src\\main\\java\\Images\\isometric gym.png")); // NOI18N
@@ -164,10 +163,10 @@ public class login extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(55, 55, 55))
         );
 
         pack();
