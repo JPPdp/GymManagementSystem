@@ -44,8 +44,25 @@ public class TestConnection {
         
         rs = pst.executeQuery();
         if(rs.next()){
+            
+            String idNum = rs.getString(1);
+            System.out.println(idNum);
+            
             String name = rs.getString(2);
             System.out.println(name);
+            
+            String mobileNum = rs.getString(3);
+            System.out.println(mobileNum);
+            
+            String emailAdd = rs.getString(4);
+            System.out.println(emailAdd);
+            
+            String gender = rs.getString(5);
+            System.out.println(gender);
+            
+            String time = rs.getString(6);
+            System.out.println(time);
+            
         }
         } catch(SQLException e){
             JOptionPane.showMessageDialog(null, e);

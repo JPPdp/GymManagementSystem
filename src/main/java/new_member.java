@@ -1,4 +1,7 @@
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -16,6 +19,7 @@ public class new_member extends javax.swing.JFrame {
     public new_member() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -269,9 +273,59 @@ public class new_member extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-         
+         CreateNew(jTextField1, jTextField3, jTextField4, jTextField5, jComboBox1, jComboBox2);
     }//GEN-LAST:event_jButton2MouseClicked
 
+    private Connection connectDatabase() {
+    String url = "jdbc:mysql://localhost:3306/member";
+    String username = "root"; // Replace with your MySQL username
+    String password = ""; // Replace with your MySQL password
+
+    try {
+        return DriverManager.getConnection(url, username, password);
+    } catch (SQLException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Database connection failed: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    }
+    private void CreateNew(javax.swing.JTextField nameField, javax.swing.JTextField mobileField, javax.swing.JTextField emailField,
+                       javax.swing.JTextField ageField, javax.swing.JComboBox<String> genderCombo, javax.swing.JComboBox<String> gymTimeCombo) {
+    // Retrieve values from the fields
+    String name = nameField.getText();
+    String mobile = mobileField.getText();
+    String email = emailField.getText();
+    String age = ageField.getText();
+    String gender = (String) genderCombo.getSelectedItem();
+    String gymTime = (String) gymTimeCombo.getSelectedItem();
+
+    // Check if fields are not empty
+    if (name.isEmpty() || mobile.isEmpty() || email.isEmpty() || age.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please fill all fields!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Database operation
+    Connection conn = connectDatabase();
+    if (conn != null) {
+        String sql = "INSERT INTO Members (name, mobile, email, age, gender, gymTime) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, name);
+            stmt.setString(2, mobile);
+            stmt.setString(3, email);
+            stmt.setInt(4, Integer.parseInt(age));
+            stmt.setString(5, gender);
+            stmt.setString(6, gymTime);
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "New member added successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Failed to add member: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -305,6 +359,8 @@ public class new_member extends javax.swing.JFrame {
                 new new_member().setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

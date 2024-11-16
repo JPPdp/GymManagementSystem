@@ -1,4 +1,5 @@
 home$6.class
+Update_Delete$4.class
 user\gymmanagementsystem\GymManagementSystem.class
 login$3.class
 new_member$2.class
@@ -11,10 +12,11 @@ home$2.class
 new_member$5.class
 login$2.class
 new_member$1.class
+Update_Delete$3.class
 home$7.class
-new_member$6.class
 home$5.class
 login$4.class
+TestConnection.class
 list_all_members$1.class
 new_member$3.class
 new_member.class
