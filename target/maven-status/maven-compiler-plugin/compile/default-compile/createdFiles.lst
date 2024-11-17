@@ -1,4 +1,5 @@
 home$6.class
+Payment$2.class
 Update_Delete$4.class
 user\gymmanagementsystem\GymManagementSystem.class
 login$3.class
@@ -14,16 +15,19 @@ login$2.class
 new_member$1.class
 Update_Delete$3.class
 home$7.class
+Payment.class
 home$5.class
 login$4.class
 TestConnection.class
 list_all_members$1.class
+Payment$1.class
 new_member$3.class
 new_member.class
 list_all_members$2.class
 Update_Delete$1.class
 home.class
 new_member$4.class
+home$8.class
 login$1.class
 login.class
 home$3.class
