@@ -1,0 +1,29 @@
+-- Step 1: Drop the database if it exists
+DROP DATABASE IF EXISTS member;
+
+-- Step 2: Create the 'member' database
+CREATE DATABASE member;
+
+-- Step 3: Use the 'member' database
+USE member;
+
+-- Step 4: Create the 'Members' table
+CREATE TABLE Members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    mobile VARCHAR(15) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    age INT NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    gymTime ENUM('05:00AM-11:00AM', '04:00PM-08:00PM') NOT NULL
+);
+
+-- Step 5: Create the 'Payments' table, linked to 'Members' by 'member_id'
+CREATE TABLE Payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    member_id INT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    payment_status ENUM('PAID', 'PENDING', 'PARTIAL') NOT NULL,
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (member_id) REFERENCES Members(id) ON DELETE CASCADE
+);
