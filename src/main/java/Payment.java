@@ -1,3 +1,10 @@
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -15,7 +22,33 @@ public class Payment extends javax.swing.JFrame {
     public Payment() {
         initComponents();
     }
+    public static Connection conn(){
+        try{
+            String url = "jdbc:mysql://localhost:3306/member";
+            String user = "root";
+            String password = "";
+            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            Connection conn = DriverManager.getConnection(url, user, password);
+            return conn;
+        } catch(SQLException|ClassNotFoundException e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    private Connection connectDatabase() {
+        String url = "jdbc:mysql://localhost:3306/member";
+        String username = "root"; // Replace with your MySQL username
+        String password = ""; // Replace with your MySQL password
 
+        try {
+            return DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Database connection failed: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,6 +61,18 @@ public class Payment extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,15 +91,87 @@ public class Payment extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Commisions\\GymManagementSystem\\src\\main\\java\\Images\\Mobile Payment_2.png")); // NOI18N
         jLabel1.setText("Payment");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Search ID");
+
+        jButton2.setBackground(new java.awt.Color(153, 153, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon("D:\\Commisions\\GymManagementSystem\\src\\main\\java\\Images\\Search Client_1.png")); // NOI18N
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Name:");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Payment Status:");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Name");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setText("----");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Amount:");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("0000");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("Amount to PAY");
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setText("PAY");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 752, Short.MAX_VALUE)
-                .addComponent(jButton1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(58, 58, 58)
+                                .addComponent(jLabel8))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel5))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel6)))
+                                .addGap(138, 138, 138)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)))
+                        .addGap(0, 328, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -62,9 +179,28 @@ public class Payment extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(jButton2))
                     .addComponent(jButton1))
-                .addContainerGap(546, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jButton3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addContainerGap(387, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -81,10 +217,168 @@ public class Payment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchMemberById(javax.swing.JTextField jTextField1, javax.swing.JLabel jLabel5, javax.swing.JLabel jLabel6, javax.swing.JLabel jLabel8) {
+    // Retrieve the ID from the text field
+    String idText = jTextField1.getText();
+
+    // Check if the ID is valid (non-empty and a number)
+    if (idText.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid ID!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int memberId;
+    try {
+        memberId = Integer.parseInt(idText); // Convert the text to an integer
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid ID format!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Database connection
+    Connection conn = connectDatabase();
+    if (conn != null) {
+        String sql = "SELECT m.name, p.payment_status, p.amount "
+                   + "FROM Members m "
+                   + "LEFT JOIN Payments p ON m.id = p.member_id "
+                   + "WHERE m.id = ? "
+                   + "LIMIT 1";  // Limit to 1 record
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, memberId);  // Set the member ID parameter
+
+            // Execute the query
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Retrieve the results and update the labels
+                    String name = rs.getString("name");
+                    String paymentStatus = rs.getString("payment_status");
+                    BigDecimal amount = rs.getBigDecimal("amount");
+
+                    // Set the labels with the retrieved values
+                    jLabel5.setText(name != null ? name : "No name found");
+                    jLabel6.setText(paymentStatus != null ? paymentStatus : "No payment status");
+                    jLabel8.setText(amount != null ? "P" + amount.toString() : "No payment amount");
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Member not found!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+    private void makePayment(javax.swing.JTextField jTextField1, javax.swing.JTextField jTextField2, javax.swing.JLabel jLabel6, javax.swing.JLabel jLabel8) {
+    // Retrieve the member ID from jTextField1 and the payment amount from jTextField2
+    String idText = jTextField1.getText();
+    String paymentAmountText = jTextField2.getText();
+    
+    // Validate the ID and payment amount
+    if (idText.isEmpty() || paymentAmountText.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please enter both ID and payment amount!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int memberId;
+    BigDecimal paymentAmount;
+    
+    // Validate the ID format
+    try {
+        memberId = Integer.parseInt(idText);
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid ID format!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    // Validate the payment amount format
+    try {
+        paymentAmount = new BigDecimal(paymentAmountText);
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid payment amount format!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Database connection
+    Connection conn = connectDatabase();
+    if (conn != null) {
+        // SQL query to get the current amount due for the given member ID
+        String selectSql = "SELECT p.amount, p.payment_status FROM Payments p "
+                         + "WHERE p.member_id = ? "
+                         + "ORDER BY p.payment_date DESC LIMIT 1"; // Assuming the most recent payment record
+        
+        try (PreparedStatement stmt = conn.prepareStatement(selectSql)) {
+            stmt.setInt(1, memberId);  // Set the member ID parameter
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Retrieve the current amount due and the payment status
+                    BigDecimal currentAmount = rs.getBigDecimal("amount");
+                    String paymentStatus = rs.getString("payment_status");
+
+                    // Display the current amount in jLabel8
+                    jLabel8.setText("₱" + currentAmount.toString());
+
+                    // Check if the payment amount is enough to pay off the balance
+                    BigDecimal remainingBalance = currentAmount.subtract(paymentAmount);
+                    
+                    if (remainingBalance.compareTo(BigDecimal.ZERO) <= 0) {
+                        // If the remaining balance is 0 or negative, the payment is sufficient to mark as paid
+                        String updatePaymentSql = "UPDATE Payments SET amount = 0, payment_status = 'PAID' WHERE member_id = ?";
+                        try (PreparedStatement updateStmt = conn.prepareStatement(updatePaymentSql)) {
+                            updateStmt.setInt(1, memberId);
+
+                            int rowsUpdated = updateStmt.executeUpdate();
+                            if (rowsUpdated > 0) {
+                                javax.swing.JOptionPane.showMessageDialog(this, "Payment complete. Status updated to 'PAID'.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                                jLabel6.setText("PAID");
+                                jLabel8.setText("₱0.00");
+                            } else {
+                                javax.swing.JOptionPane.showMessageDialog(this, "1Failed to update payment status.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    } else {
+                        // If the payment amount is not enough, just deduct it from the balance
+                        String updatePaymentSql = "UPDATE Payments SET amount = ? WHERE member_id = ? AND payment_status != 'PAID'";
+                        try (PreparedStatement updateStmt = conn.prepareStatement(updatePaymentSql)) {
+                            updateStmt.setBigDecimal(1, remainingBalance);  // Deduct the payment
+                            updateStmt.setInt(2, memberId);
+
+                            int rowsUpdated = updateStmt.executeUpdate();
+                            if (rowsUpdated > 0) {
+                                javax.swing.JOptionPane.showMessageDialog(this, "Partial payment accepted. Remaining balance: ₱" + remainingBalance.toString(), "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                                jLabel6.setText("Partial Payment");
+                                jLabel8.setText("₱" + remainingBalance.toString());
+                            } else {
+                                javax.swing.JOptionPane.showMessageDialog(this, "2Failed to update payment record.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    }
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "No payment record found for the given member ID.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (SQLException e) {
+            // Catch SQL exceptions and show the error message
+            javax.swing.JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace(); // Log the error for debugging purposes
+        }
+    }
+}
+
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
+    
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        searchMemberById(jTextField1, jLabel5, jLabel6, jLabel8);
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        makePayment(jTextField1, jTextField2, jLabel6, jLabel8);
+    }//GEN-LAST:event_jButton3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -123,7 +417,19 @@ public class Payment extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

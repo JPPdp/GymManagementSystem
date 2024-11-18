@@ -1,8 +1,9 @@
+import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -142,7 +143,6 @@ public class Update_Delete extends javax.swing.JFrame {
         jLabel2.setText("Search ID:");
 
         jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setText("Enter Member ID");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -197,6 +197,11 @@ public class Update_Delete extends javax.swing.JFrame {
         jButton2.setBorderPainted(false);
         jButton2.setFocusPainted(false);
         jButton2.setFocusable(false);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(153, 153, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -207,6 +212,11 @@ public class Update_Delete extends javax.swing.JFrame {
         jButton3.setBorderPainted(false);
         jButton3.setFocusPainted(false);
         jButton3.setFocusable(false);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(153, 153, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -216,6 +226,12 @@ public class Update_Delete extends javax.swing.JFrame {
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
         jButton4.setFocusPainted(false);
+        jButton4.setFocusable(false);
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -348,6 +364,188 @@ public class Update_Delete extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        GetMemberById(jTextField2, jTextField9, jTextField8, jTextField7, jTextField6, jComboBox4, jComboBox3);
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        DeleteMember(jTextField2);
+
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        UpdateMember(jTextField2, jTextField9, jTextField8, jTextField7, jTextField6, jComboBox4, jComboBox3);
+    }//GEN-LAST:event_jButton3MouseClicked
+    private Connection connectDatabase() {
+        String url = "jdbc:mysql://localhost:3306/member";
+        String username = "root"; // Replace with your MySQL username
+        String password = ""; // Replace with your MySQL password
+
+        try {
+            return DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Database connection failed: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+    private void GetMemberById(javax.swing.JTextField jTextField2, javax.swing.JTextField jTextField9, javax.swing.JTextField jTextField8, 
+                            javax.swing.JTextField jTextField7, javax.swing.JTextField jTextField6, javax.swing.JComboBox<String> comboBox4, 
+                            javax.swing.JComboBox<String> gymTimeCombo) {
+    // Retrieve the ID from jTextField2
+    String idText = jTextField2.getText();
+    
+    // Validate the member ID (ensure it's a valid number and greater than 0)
+    int memberId;
+    try {
+        memberId = Integer.parseInt(idText);
+        if (memberId <= 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid member ID!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid ID format. Please enter a valid numeric ID.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Database operation
+    Connection conn = connectDatabase();
+    if (conn != null) {
+        // SQL query to select the member by ID
+        String sql = "SELECT name, mobile, email, age, gender, gymTime FROM Members WHERE id = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            // Set the member ID in the query
+            stmt.setInt(1, memberId);
+
+            // Execute the query and retrieve the result
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Populate the fields with the retrieved data
+                    jTextField9.setText(rs.getString("name"));
+                    jTextField8.setText(rs.getString("mobile"));
+                    jTextField7.setText(rs.getString("email"));
+                    jTextField6.setText(String.valueOf(rs.getInt("age")));
+                    comboBox4.setSelectedItem(rs.getString("gender"));
+                    gymTimeCombo.setSelectedItem(rs.getString("gymTime"));
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "No member found with the given ID.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Failed to retrieve member: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+    private void UpdateMember(javax.swing.JTextField jTextField2, javax.swing.JTextField jTextField9, javax.swing.JTextField jTextField8, 
+                          javax.swing.JTextField jTextField7, javax.swing.JTextField jTextField6, javax.swing.JComboBox<String> comboBox4, 
+                          javax.swing.JComboBox<String> gymTimeCombo) {
+    // Retrieve the ID from jTextField2
+    String idText = jTextField2.getText();
+    
+    // Validate the member ID (ensure it's a valid number and greater than 0)
+    int memberId;
+    try {
+        memberId = Integer.parseInt(idText);
+        if (memberId <= 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid member ID!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid ID format. Please enter a valid numeric ID.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Retrieve the new member information from the fields
+    String name = jTextField9.getText();
+    String mobile = jTextField8.getText();
+    String email = jTextField7.getText();
+    String age = jTextField6.getText();
+    String gender = (String) comboBox4.getSelectedItem();
+    String gymTime = (String) gymTimeCombo.getSelectedItem();
+
+    // Check if fields are not empty
+    if (name.isEmpty() || mobile.isEmpty() || email.isEmpty() || age.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please fill all fields!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Database operation
+    Connection conn = connectDatabase();
+    if (conn != null) {
+        // SQL query to update the member details by ID
+        String sql = "UPDATE Members SET name = ?, mobile = ?, email = ?, age = ?, gender = ?, gymTime = ? WHERE id = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            // Set the parameters for the update
+            stmt.setString(1, name);
+            stmt.setString(2, mobile);
+            stmt.setString(3, email);
+            stmt.setInt(4, Integer.parseInt(age));
+            stmt.setString(5, gender);
+            stmt.setString(6, gymTime);
+            stmt.setInt(7, memberId);
+
+            // Execute the update query
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Member updated successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "No member found with the given ID.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Failed to update member: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+    private void DeleteMember(javax.swing.JTextField jTextField2) {
+    // Retrieve the ID from jTextField2
+    String idText = jTextField2.getText();
+
+    // Validate the member ID (ensure it's a valid number and greater than 0)
+    int memberId;
+    try {
+        memberId = Integer.parseInt(idText);
+        if (memberId <= 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid member ID!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid ID format. Please enter a valid numeric ID.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Database operation
+    Connection conn = connectDatabase();
+    if (conn != null) {
+        // SQL query to delete the member by ID
+        String sql = "DELETE FROM Members WHERE id = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            // Set the member ID in the query
+            stmt.setInt(1, memberId);
+
+            // Execute the delete query
+            int rowsDeleted = stmt.executeUpdate();
+            if (rowsDeleted > 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Member deleted successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                jTextField2.setText("");
+                jTextField9.setText("");
+                jTextField8.setText("");
+                jTextField7.setText("");
+                jTextField6.setText("");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "No member found with the given ID.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Failed to delete member: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
+}
     /**
      * @param args the command line arguments
      */
